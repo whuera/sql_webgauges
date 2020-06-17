@@ -1,0 +1,148 @@
+USE [proyectsgauges]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_CreateActiveUser]    Script Date: 16/6/2020 21:05:51 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[sp_CreateActiveUser]
+(
+@firtsNames varchar(80),
+@lastNames varchar(80),
+@area int,
+@email varchar(80),
+@usuario varchar(20),
+@dataform int,
+@status_user int,
+@rol int
+
+)
+AS
+BEGIN
+insert into APP_USER (NOMBRES, APELLIDOS, ID_AREAS, EMAIL, USUARIO, DATAFORM, ESTATUS_USUARIO, ID_USER_ROLE) 
+values (@firtsNames, @lastNames, @area, @email, @usuario, @dataform, @status_user, @rol);
+END
+GO
+
+
+USE [proyectsgauges]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_CreateGauges]    Script Date: 16/6/2020 21:06:11 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_CreateGauges]
+(
+@idProject int,
+@idAappuser int,
+@nameGauge varchar(80),
+@valueGauge int,
+@planned_date varchar(10),
+@deliver_date varchar(10),
+@observation_date  varchar(256),
+@rating_projects int
+)
+AS
+BEGIN
+insert into APP_INDICADORES (ID_PROYECTOS, ID_APP_USER, NOMBRE_INDICADOR, VALOR_INDICADOR, APP_PLANNED_DATE, APP_DELIVER_DATE, APP_OBSERVATION_DATE, APP_RATING_PROJECTS) 
+/*values (@idProject, @nameGauge, @valueGauge, CASE WHEN @observationGauge IS NULL THEN ' SIN OBSERVACION ' ELSE @observationGauge END);*/
+values(@idProject, @idAappuser, @nameGauge, @valueGauge, @planned_date, @deliver_date, CASE WHEN @observation_date IS NULL THEN ' SIN OBSERVACION ' ELSE @observation_date END, @rating_projects);
+END
+GO
+
+
+USE [proyectsgauges]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getActiveUser]    Script Date: 16/6/2020 21:06:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_getActiveUser]
+(
+@userLogin varchar(20)
+)
+AS
+BEGIN
+select a.*, b.* from app_user a, APP_ADMIN b  where usuario =  @userLogin;
+END
+GO
+
+USE [proyectsgauges]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getProjectById]    Script Date: 16/6/2020 21:06:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[sp_getProjectById]
+(
+@idProject int
+)
+AS
+BEGIN
+SELECT * FROM PROYECTOS PR WHERE PR.ID_PROYECTOS = @idProject; 
+END
+GO
+
+USE [proyectsgauges]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_updateActiveUser]    Script Date: 16/6/2020 21:06:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[sp_updateActiveUser]
+(
+@firtsNames varchar(80),
+@lastNames varchar(80),
+@area int,
+@email varchar(80),
+@usuario varchar(20)
+)
+AS
+BEGIN
+UPDATE APP_USER 
+SET NOMBRES = @firtsNames, APELLIDOS = @lastNames, ID_AREAS = @area, EMAIL = @email
+where usuario = @usuario;
+END
+GO
+
+USE [proyectsgauges]
+GO
+
+/****** Object:  StoredProcedure [dbo].[prc_app]    Script Date: 16/6/2020 21:06:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[prc_app]
+(
+@idapp varchar(10)
+)
+as
+begin
+select * from APP;
+end
+GO
+

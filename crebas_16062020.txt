@@ -1,0 +1,527 @@
+/*==============================================================*/
+/* DBMS name:      Microsoft SQL Server 2016                    */
+/* Created on:     16/6/2020 21:04:59                           */
+/*==============================================================*/
+
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP')
+            and   type = 'U')
+   drop table APP
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_ADMIN')
+            and   name  = 'RELATIONSHIP_13_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_ADMIN.RELATIONSHIP_13_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_ADMIN')
+            and   name  = 'RELATIONSHIP_12_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_ADMIN.RELATIONSHIP_12_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_ADMIN')
+            and   type = 'U')
+   drop table APP_ADMIN
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_ALERTS')
+            and   type = 'U')
+   drop table APP_ALERTS
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_AREAS')
+            and   type = 'U')
+   drop table APP_AREAS
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_INDICADORES')
+            and   name  = 'RELATIONSHIP_17_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_INDICADORES.RELATIONSHIP_17_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_INDICADORES')
+            and   type = 'U')
+   drop table APP_INDICADORES
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_NOTIFICATIOS')
+            and   name  = 'RELATIONSHIP_15_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_NOTIFICATIOS.RELATIONSHIP_15_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_NOTIFICATIOS')
+            and   name  = 'RELATIONSHIP_14_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_NOTIFICATIOS.RELATIONSHIP_14_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_NOTIFICATIOS')
+            and   type = 'U')
+   drop table APP_NOTIFICATIOS
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_ROLES')
+            and   type = 'U')
+   drop table APP_ROLES
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_USER')
+            and   name  = 'RELATIONSHIP_16_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_USER.RELATIONSHIP_16_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('APP_USER')
+            and   name  = 'RELATIONSHIP_11_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index APP_USER.RELATIONSHIP_11_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_USER')
+            and   type = 'U')
+   drop table APP_USER
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('APP_USER_ROLE')
+            and   type = 'U')
+   drop table APP_USER_ROLE
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('EVALUACION')
+            and   name  = 'RELATIONSHIP_8_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index EVALUACION.RELATIONSHIP_8_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('EVALUACION')
+            and   type = 'U')
+   drop table EVALUACION
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('PERIODOS')
+            and   type = 'U')
+   drop table PERIODOS
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('PROYECTOS')
+            and   name  = 'RELATIONSHIP_13_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index PROYECTOS.RELATIONSHIP_13_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('PROYECTOS')
+            and   name  = 'RELATIONSHIP_1_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index PROYECTOS.RELATIONSHIP_1_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('PROYECTOS')
+            and   type = 'U')
+   drop table PROYECTOS
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('SESSION_APP')
+            and   name  = 'RELATIONSHIP_6_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index SESSION_APP.RELATIONSHIP_6_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('SESSION_APP')
+            and   name  = 'RELATIONSHIP_5_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index SESSION_APP.RELATIONSHIP_5_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('SESSION_APP')
+            and   type = 'U')
+   drop table SESSION_APP
+go
+
+drop schema SCHEMA_1
+go
+
+drop schema SCHEMA_2
+go
+
+/*==============================================================*/
+/* User: SCHEMA_1                                               */
+/*==============================================================*/
+create schema SCHEMA_1
+go
+
+/*==============================================================*/
+/* User: SCHEMA_2                                               */
+/*==============================================================*/
+create schema SCHEMA_2
+go
+
+/*==============================================================*/
+/* Table: APP                                                   */
+/*==============================================================*/
+create table APP (
+   ID_APP               int                  identity,
+   NOMBRE_APP           varchar(50)          null,
+   TOKEN_APP            varchar(60)          null,
+   OBSERVACION_APP      varchar(256)         null,
+   constraint PK_APP primary key (ID_APP)
+)
+go
+
+/*==============================================================*/
+/* Table: APP_ADMIN                                             */
+/*==============================================================*/
+create table APP_ADMIN (
+   ID_APPADMIN          int                  identity,
+   ID_APP_USER          int                  null,
+   ID_ROLES             int                  null,
+   USER_ACTIVE          int                  null,
+   constraint PK_APP_ADMIN primary key (ID_APPADMIN)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_12_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_12_FK on APP_ADMIN (ID_ROLES ASC)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_13_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_13_FK on APP_ADMIN (ID_APP_USER ASC)
+go
+
+/*==============================================================*/
+/* Table: APP_ALERTS                                            */
+/*==============================================================*/
+create table APP_ALERTS (
+   ID_APP_ALERTS        int                  identity,
+   DESCRIPTION_ALERT    varchar(100)         null,
+   ICON_ALERT           int                  null,
+   constraint PK_APP_ALERTS primary key (ID_APP_ALERTS)
+)
+go
+
+/*==============================================================*/
+/* Table: APP_AREAS                                             */
+/*==============================================================*/
+create table APP_AREAS (
+   ID_AREAS             int                  not null,
+   DES_AREA             varchar(100)         null,
+   OBSERVACION_AREA     varchar(100)         null,
+   constraint PK_APP_AREAS primary key (ID_AREAS)
+)
+go
+
+/*==============================================================*/
+/* Table: APP_INDICADORES                                       */
+/*==============================================================*/
+create table APP_INDICADORES (
+   ID_INDICADORES       int                  identity,
+   ID_APP_USER          int                  null,
+   ID_PROYECTOS         int                  null,
+   NOMBRE_INDICADOR     text                 null,
+   VALOR_INDICADOR      int                  null,
+   ESPECIFICACION_INDICADOR text                 null,
+   OBSERVACION_INDICADOR text                 null,
+   APP_PLANNED_DATE     varchar(10)          null,
+   APP_DELIVER_DATE     varchar(10)          null,
+   APP_OBSERVATION_DATE varchar(256)         null,
+   APP_NUMBER_VERSIONS_TO_QA int                  null,
+   APP_OBSERVATION_NUMBER_VERSIONS_TO_QA varchar(256)         null,
+   APP_NUMBER_INCIDENTS_TO_PROD int                  null,
+   APP_OBSERVATION_NUMBER_INCIDENTS_TO_PROD varchar(256)         null,
+   APP_RATING_PROJECTS  int                  null,
+   APP_RATING_QA        int                  null,
+   APP_RATING_PROD      int                  null,
+   APP_AVERAGE_PROJECT  double precision     null,
+   constraint PK_APP_INDICADORES primary key (ID_INDICADORES)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_17_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_17_FK on APP_INDICADORES (ID_APP_USER ASC)
+go
+
+/*==============================================================*/
+/* Table: APP_NOTIFICATIOS                                      */
+/*==============================================================*/
+create table APP_NOTIFICATIOS (
+   ID_NOTIFY            int                  identity,
+   ID_APP_ALERTS        int                  null,
+   ID_APP_USER          int                  null,
+   DESCRIPTION_NOTIFY   varchar(200)         null,
+   OBSERVATION_NOTIFY   varchar(200)         null,
+   constraint PK_APP_NOTIFICATIOS primary key (ID_NOTIFY)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_14_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_14_FK on APP_NOTIFICATIOS (ID_APP_ALERTS ASC)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_15_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_15_FK on APP_NOTIFICATIOS (ID_APP_USER ASC)
+go
+
+/*==============================================================*/
+/* Table: APP_ROLES                                             */
+/*==============================================================*/
+create table APP_ROLES (
+   ID_ROLES             int                  identity,
+   DESC_ROLES           varchar(50)          null,
+   OBSERVACION_ROLE     varchar(256)         null,
+   CREAR                varchar(2)           null,
+   ACTUALIZAR           varchar(2)           null,
+   ELIMINAR             varchar(2)           null,
+   OBSERVADOR           varchar(2)           null,
+   TYPE_ROL             int                  null,
+   constraint PK_APP_ROLES primary key (ID_ROLES)
+)
+go
+
+/*==============================================================*/
+/* Table: APP_USER                                              */
+/*==============================================================*/
+create table APP_USER (
+   ID_APP_USER          int                  identity,
+   ID_USER_ROLE         int                  null,
+   ID_AREAS             int                  null,
+   USUARIO              varchar(20)          null,
+   PASSWORD             varchar(80)          null,
+   ESTATUS_USUARIO      int                  null,
+   NOMBRES              varchar(80)          null,
+   APELLIDOS            varchar(80)          null,
+   EMAIL                varchar(80)          null,
+   DATAFORM             int                  null,
+   constraint PK_APP_USER primary key (ID_APP_USER)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_11_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_11_FK on APP_USER (ID_AREAS ASC)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_16_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_16_FK on APP_USER (ID_USER_ROLE ASC)
+go
+
+/*==============================================================*/
+/* Table: APP_USER_ROLE                                         */
+/*==============================================================*/
+create table APP_USER_ROLE (
+   ID_USER_ROLE         int                  identity,
+   DESCRIPTION_USER_ROLE varchar(80)          null,
+   constraint PK_APP_USER_ROLE primary key (ID_USER_ROLE)
+)
+go
+
+/*==============================================================*/
+/* Table: EVALUACION                                            */
+/*==============================================================*/
+create table EVALUACION (
+   ID_EVALUACION        int                  identity,
+   ID_PERIODO           int                  null,
+   NOMBRE_EVALUACION    varchar(50)          null,
+   ESTATUS_EVALUACION   int                  null,
+   constraint PK_EVALUACION primary key (ID_EVALUACION)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_8_FK                                     */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_8_FK on EVALUACION (ID_PERIODO ASC)
+go
+
+/*==============================================================*/
+/* Table: PERIODOS                                              */
+/*==============================================================*/
+create table PERIODOS (
+   ID_PERIODO           int                  identity,
+   NOMBRE_PERIODO       text                 null,
+   FECHA_INICIO         datetime             null,
+   FECHA_FIN            datetime             null,
+   OBSERVACION          text                 null,
+   constraint PK_PERIODOS primary key (ID_PERIODO)
+)
+go
+
+/*==============================================================*/
+/* Table: PROYECTOS                                             */
+/*==============================================================*/
+create table PROYECTOS (
+   ID_PROYECTOS         int                  identity,
+   ID_PERIODO           int                  null,
+   ID_APP_USER          int                  null,
+   NOMBRE_PROYECTO      text                 null,
+   CODIGO_PROYECTO      varchar(10)          null,
+   ESTATUS_PROYECTO     int                  null,
+   OBSERVACION_PROYECTO text                 null,
+   constraint PK_PROYECTOS primary key (ID_PROYECTOS)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_1_FK                                     */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_1_FK on PROYECTOS (ID_PERIODO ASC)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_13_FK                                    */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_13_FK on PROYECTOS (ID_APP_USER ASC)
+go
+
+/*==============================================================*/
+/* Table: SESSION_APP                                           */
+/*==============================================================*/
+create table SESSION_APP (
+   ID_SESSION_APP       int                  identity,
+   ID_APP_USER          int                  null,
+   ID_APP               int                  null,
+   FECHA_INCIO          datetime             null,
+   FECHA_FIN            datetime             null,
+   MODO_SESSION         varchar(60)          null,
+   OBSERVACION_SESSION  text                 null,
+   constraint PK_SESSION_APP primary key (ID_SESSION_APP)
+)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_5_FK                                     */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_5_FK on SESSION_APP (ID_APP ASC)
+go
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_6_FK                                     */
+/*==============================================================*/
+
+
+
+
+create nonclustered index RELATIONSHIP_6_FK on SESSION_APP (ID_APP_USER ASC)
+go
+
